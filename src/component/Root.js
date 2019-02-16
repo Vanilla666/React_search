@@ -1,20 +1,21 @@
-import React from 'react';
-
-class Contacts extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
+import React from 'react'; //主要框架
+// import $ from 'jquery'; //引入jq
+import Hello from './Hello'; //引用其他組件
+class Contacts extends React.Component { // React.Component = react 主要作組件
+  constructor(props) { //建構子
+    super(props) //繼承父元件資訊
+    this.state = {  //起始化設定內部屬性
       items: [],
       data: [],
       search: ''
     }
     this.updateSearch = this.updateSearch.bind(this); //setState只要改變值都要
-    this.search = this.search.bind(this);
+    // this.search = this.search.bind(this);
   }
 
-  componentWillMount() {
-
-    this.setState({
+  componentWillMount() { //組件即將掛載
+    // this.loadCommentsFromServer();
+    this.setState({ //設定初始值
       items: [], //放符合的收尋
       data: [ //一開始資料
         "Apples",
@@ -30,13 +31,13 @@ class Contacts extends React.Component {
     }
     )
   }
-
   updateSearch(event) { // onChange={this.updateSearch} 觸發時使用
     //console.log(event.target.value); //當前輸入值
     var datedList = this.state.data;//去拿內部預設資料
     this.setState({ data: datedList, search: event.target.value.toLowerCase() });//就把符合的對象放到item
   }
-  search() { //這裡做測試
+
+  search() { //這裡做收尋
     // console.log(this.state.items, this.state.data, this.state.search);
     let insideState = { ...this.state }; //解構
     // console.log(updatedList);
@@ -60,14 +61,13 @@ class Contacts extends React.Component {
           </fieldset>
         </form>
         <ul >
-          {this.search()}
+          {this.search()}  {/* 做資料判斷,介面更新 */}
         </ul>
+        <Hello name="Hyora">  </Hello>
       </div>
+
     );
   }
 }
 
-
-
-
-export default Contacts;
+export default Contacts;  // 匯出 Contacts Component 
